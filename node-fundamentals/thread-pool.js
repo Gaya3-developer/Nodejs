@@ -23,11 +23,11 @@ console.log(`Synchronous blocking Hash`, Date.now() - start);
 //const MAX_CALLS = 12; 
 const MAX_CALLS = 16; 
 
-// for (let i = 0; i < MAX_CALLS; i++) {
-//   crypto.pbkdf2("a", "b", 100000, 512, "sha512", () => {
-//    console.log(`asynchronous blocking Hash: ${i + 1}`, Date.now() - start);
-//  });
-// }
+for (let i = 0; i < MAX_CALLS; i++) {
+  crypto.pbkdf2("a", "b", 100000, 512, "sha512", () => {
+   console.log(`asynchronous blocking Hash: ${i + 1}`, Date.now() - start);
+ });
+}
 
 
 
