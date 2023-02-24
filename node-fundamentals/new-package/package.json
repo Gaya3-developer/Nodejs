@@ -1,14 +1,15 @@
 {
-  "name": "greet-evolution",
+  "name": "new-package",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "upper-case": "^2.0.2"
+    "greet-evolution": "^1.0.0"
   }
 }

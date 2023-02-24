@@ -1,8 +1,8 @@
 /** Experiment 1 - all user written JavaScript code takes priority over async code that the runtime would like to execute */
 
-// console.log("console.log 1");
-// process.nextTick(() => console.log("this is process.nextTick 1"));
-// console.log("console.log 2");
+//  console.log("console.log 1");
+//  process.nextTick(() => console.log("this is process.nextTick 1"));
+//  console.log("console.log 2");
 
 /** Experiment 2 - all callbacks in nextTick queue are executed before all callbacks in promise queue */
 
@@ -29,7 +29,7 @@
 // process.nextTick(() => console.log("this is process.nextTick 1"));
 // process.nextTick(() => {
 //   console.log("this is process.nextTick 2");
-//   process.nextTick(() => consol.log("this is the inner next tick inside next tick"));
+//   process.nextTick(() => console.log("this is the inner next tick inside next tick"));
 // });
 // process.nextTick(() => console.log("this is process.nextTick 3"));
 
@@ -49,6 +49,7 @@
 //   process.nextTick(
 //     console.log.bind(console, "this is the inner next tick inside setTimeout")
 //   );
+//   Promise.resolve().then(() => console.log("tthis is the inner promise tick inside setTimeout"));
 // }, 0);
 // setTimeout(() => console.log("this is setTimeout 3"), 0);
 
@@ -112,7 +113,7 @@
 // Promise.resolve().then(() => console.log("this is Promise.resolve 1"));
 // setTimeout(() => console.log("this is setTimeout 1"), 0);
 
-// for (let i = 0; i < 1000000000; i++) {}
+// for (let i = 0; i < 1000000000; i++) {} // io pooling
 
 /** Experiment 9 - I/O events are polled and callbacks are added only after I/O is complete */
 
@@ -180,15 +181,15 @@
 
 /** Experiment 14 - Close queue callbacks are executed after all other queues callbacks  */
 
-// const fs = require("fs");
+const fs = require("fs");
 
-// const readableStream = fs.createReadStream(__filename);
-// readableStream.close();
+const readableStream = fs.createReadStream(__filename);
+readableStream.close();
 
-// readableStream.on("close", () => {
-//   console.log("this is from readableStream close event callback");
-// });
-// setImmediate(() => console.log("this is setImmediate 1"));
-// setTimeout(() => console.log("this is setTimeout 1"), 0);
-// Promise.resolve().then(() => console.log("this is Promise.resolve 1"));
-// process.nextTick(() => console.log("this is process.nextTick 1"));
+readableStream.on("close", () => {
+  console.log("this is from readableStream close event callback");
+});
+setImmediate(() => console.log("this is setImmediate 1"));
+setTimeout(() => console.log("this is setTimeout 1"), 0);
+Promise.resolve().then(() => console.log("this is Promise.resolve 1"));
+process.nextTick(() => console.log("this is process.nextTick 1"));
