@@ -1,4 +1,4 @@
-const cluster = require("cluster");
+const cluster = require("node:cluster");
 const http = require("http");
 const numOfCPUs = require("os").cpus().length; //returns no of cores our cpu have
 
