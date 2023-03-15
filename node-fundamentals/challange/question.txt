@@ -1,0 +1,6 @@
+1.create a folder name it thapa
+2. create a file named bio.txt and add data into it.
+3. add more data into file at the end of existing data
+4. read data before getting buffer data first
+5.rename file to mybio.txt
+6. now delete both the files and folder
