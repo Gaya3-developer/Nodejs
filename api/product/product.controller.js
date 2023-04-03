@@ -1,23 +1,69 @@
 const productService = require('./product.service');
 
 module.exports = {
-    create:(req,res) =>{
-const body = req.body;
-productService.create(body).then(results => {
-    if(results){
-        res.json({
-            success : 1,
-            message:"data inserted successfully",
-            data:results
-        })
+  create: async function(req, res, next) {
+    try {
+      const product = await productService.create(req.body);
+      res.status(201).json(product);
+    } catch (err) {
+      next(err);
     }
-    else{
-        res.json({
-            success : 0,
-            message:"failed to insert data",
-        })
+  },
+  update: async function(req, res, next) {
+    try {
+      const productId = req.params.id;
+      const product = await productService.update(productId, req.body);
+      res.json(product);
+    } catch (err) {
+      next(err);
     }
-  
-})
+  },
+  delete: async function(req, res, next) {
+    try {
+      const productId = req.params.id;
+      await productService.delete(productId);
+      res.json({ message: 'Product deleted successfully' });
+    } catch (err) {
+      next(err);
     }
+  },
+  getById: async function(req, res, next) {
+    try {
+      const productId = req.params.id;
+      const product = await productService.getById(productId);
+      res.json(product);
+    } catch (err) {
+      next(err);
+    }
+  },
+  getAll: async function(req, res, next) {
+    try {
+      const products = await productService.getAll();
+      res.json(products);
+    } catch (err) {
+      next(err);
+    }
+  },
+  deleteAll : async function(req, res, next) {
+    try {
+      await productService.deleteAll();
+      return res.status(200).json({
+        message: 'All products deleted successfully'
+      });
+    } catch (error) {
+      return res.status(500).json({
+        error: error.message
+      });
+    }
+  },
+  findAllPublished : async (req, res, next) => {
+    try {
+      const products = await productService.findAllPublished();
+      return res.status(200).json(products);
+    } catch (error) {
+      return res.status(500).json({
+        error: error.message
+      });
+    }
+}
 }
