@@ -1,0 +1,14 @@
+1. get all products
+Get http://localhost:3000/api/products/ 
+
+2. get products by id
+GET http://localhost:3000/api/products/:id
+
+3. add new products
+Post http://localhost:3000/api/products/ 
+
+4. update products by id
+PUT http://localhost:3000/api/products/:id
+
+5. remove products by id
+DELETE http://localhost:3000/api/products/:id
