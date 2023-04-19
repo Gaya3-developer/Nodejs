@@ -56,8 +56,10 @@ module.exports = {
       });
     }
   },
-  findAllPublished : async (req, res, next) => {
+  findAllPublished : async function(req, res, next) {
+   
     try {
+    
       const products = await productService.findAllPublished();
       return res.status(200).json(products);
     } catch (error) {
@@ -65,5 +67,16 @@ module.exports = {
         error: error.message
       });
     }
+},
+getAllByName: async function(req, res, next) {
+  const name = req.query.name;
+  try {
+    const products = await productService.getAllByName(name);
+    return res.status(200).json(products);
+  } catch (error) {
+    return res.status(500).json({
+      error: error.message
+    });
+  }
 }
 }

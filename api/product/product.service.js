@@ -55,8 +55,16 @@ module.exports = {
   },
   findAllPublished: async function() {
     try {
-        const publishedProducts = await Products.find({ published: true });
-        console.log(publishedProducts)
+      const products = await Products.find({ published: true });
+      return products;
+    } catch (error) {
+      throw error;
+    }
+  },
+  getAllByName: async function(name) {
+    try {
+      const products = await Products.find({ name: { $regex: name, $options: 'i' } }).populate('userid', 'name email');
+      return products;
     } catch (err) {
       throw err;
     }

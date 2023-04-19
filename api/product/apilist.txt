@@ -12,3 +12,12 @@ PUT http://localhost:3000/api/products/:id
 
 5. remove products by id
 DELETE http://localhost:3000/api/products/:id
+
+6. remove all products 
+DELETE http://localhost:3000/api/products
+
+7. find all published products 
+GET http://localhost:3000/api/products/published
+
+8. find all products by name 
+GET http://localhost:3000/api/products?name=product
