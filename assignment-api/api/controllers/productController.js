@@ -249,8 +249,8 @@ class ProductController {
   }
 
   async findPublishedProducts(req, res) {
+    console.log("hoooo")
     try {
-      console.log("hoooo")
       const products = await productService.findPublishedProducts();
      
       res.json(products);
@@ -278,6 +278,22 @@ class ProductController {
       res.status(500).json({ error: 'Internal server error' });
     }
   }
+  async getAllSortedByPrice(req, res){
+    try {
+      const products = await productService.getAllSortedByPrice();
+      return res.status(200).json(products);
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
+  };
+  async getAllSortedByRating(req, res){
+    try {
+      const products = await productService.getAllSortedByRating();
+      return res.status(200).json(products);
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
+  };
 }
 
 module.exports = ProductController;

@@ -27,14 +27,19 @@ const productController = new ProductController();
 
 // router.get('/', verifyToken, productController.getAllProducts);
 //router.get('/product', verifyToken, isAdmin, productController.getAllProductsWithPagination);
+router.get('/sort/price',verifyToken, productController.getAllSortedByPrice);
+router.get('/sort/rating',verifyToken, productController.getAllSortedByRating);
+router.get('/published', verifyToken, productController.findPublishedProducts);
+router.get('/:userId', verifyToken, productController.findProductsByUserId);
+
 router.get('/', verifyToken, productController.getAllProducts);
 router.get('/:id', verifyToken, productController.getProductById);
 router.post('/', verifyToken, productController.addProduct);
 router.put('/:id', verifyToken, productController.updateProduct);
 router.delete('/:id', verifyToken, productController.deleteProduct);
 router.delete('/', verifyToken, productController.deleteAllProducts);
-router.get('/published', verifyToken, productController.findPublishedProducts);
+
 router.get('/', verifyToken, productController.findProductsByName);
-router.get('/:userId', verifyToken, productController.findProductsByUserId);
+
 
 module.exports = router;

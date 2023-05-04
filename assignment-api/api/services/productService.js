@@ -81,6 +81,12 @@ class ProductService {
   async findProductsByUserId(userId) {
     return await Product.find({ userId });
   }
+ async getAllSortedByPrice(){
+    return await Product.find().sort({ price: 1 }); 
+  };
+  async getAllSortedByRating(){
+    return await Product.find().sort({ rating: -1 });
+  };
 }
 
 module.exports = ProductService;
