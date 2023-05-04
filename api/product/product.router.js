@@ -2,9 +2,8 @@ const express = require('express');
 const router = express.Router();
 const productsController = require('./product.controller');
 const verifyToken = require('./auth.middleware');
-router.post('/',verifyToken, productsController.create, (req, res) => {
-    // Your code here
-  });
+
+router.post('/',verifyToken, productsController.create);
 router.put('/:id',verifyToken, productsController.update);
 router.get('/published',verifyToken, productsController.findAllPublished);
 router.get('/search',verifyToken, productsController.getAllByName);
