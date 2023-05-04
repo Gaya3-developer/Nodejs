@@ -41,6 +41,7 @@
 // module.exports = ProductService;
 
 const Product = require('../models/product');
+const XLSX = require('xlsx');
 
 class ProductService {
   async getAllProducts() {
@@ -87,6 +88,31 @@ class ProductService {
   async getAllSortedByRating(){
     return await Product.find().sort({ rating: -1 });
   };
+  async  exportProductsToExcel() {
+    try {
+      // Fetch all products from the database
+      const products = await Product.find().populate('userId', 'name email');
+  
+      // Create a workbook and worksheet
+      const workbook = XLSX.utils.book_new();
+      const worksheet = XLSX.utils.json_to_sheet(products);
+  
+      // Add the worksheet to the workbook
+      XLSX.utils.book_append_sheet(workbook, worksheet, 'Products');
+  
+      // Generate a buffer from the workbook
+      const excelBuffer = XLSX.write(workbook, { type: 'buffer', bookType: 'xlsx' });
+  
+      // Save the buffer to a file or send it as a response
+      // For example, if you want to save the file locally:
+      const filename = 'products.xlsx';
+      XLSX.writeFile(workbook, filename);
+  
+      return filename;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 module.exports = ProductService;

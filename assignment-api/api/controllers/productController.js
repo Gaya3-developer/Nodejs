@@ -285,7 +285,7 @@ class ProductController {
     } catch (error) {
       return res.status(500).json({ error: error.message });
     }
-  };
+  }
   async getAllSortedByRating(req, res){
     try {
       const products = await productService.getAllSortedByRating();
@@ -293,7 +293,17 @@ class ProductController {
     } catch (error) {
       return res.status(500).json({ error: error.message });
     }
-  };
+  }
+  async  exportAllProducts(req, res) {
+    try {
+      const filename = await productService.exportProductsToExcel();
+  
+      // Send the file as a response
+      res.download(filename);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
 }
 
 module.exports = ProductController;
