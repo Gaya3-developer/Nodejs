@@ -209,7 +209,7 @@ class ProductController {
 
   async addProduct(req, res) {
     try {
-      const productData = req.body;
+      const productData = req;
       const product = await productService.addProduct(productData);
       res.status(201).json(product);
     } catch (error) {
@@ -296,7 +296,7 @@ class ProductController {
   }
   async  exportAllProducts(req, res) {
     try {
-      const filename = await productService.exportProductsToExcel();
+      const filename = await productServiceexportProductsToExcel();
   
       // Send the file as a response
       res.download(filename);

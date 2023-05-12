@@ -5,7 +5,7 @@ const productSchema = new mongoose.Schema({
   description: { type: String },
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   published: { type: Boolean, default: false },
-  image: { type: String },
+  image: { type: Array },
   price: { type: Number, default: 200 },
   rating: { type: Number, default: 3 },
   createdAt: { type: Date, default: Date.now },

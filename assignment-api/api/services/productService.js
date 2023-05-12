@@ -53,7 +53,27 @@ class ProductService {
   }
 
   async addProduct(productData) {
-    const product = new Product(productData);
+   
+    // Get the uploaded files from the request
+    const files = [...productData.file];
+    // Process the files and extract the filenames
+    const images = files.map(file => file.filename);
+  
+    // Get the other product data from the request body
+    const { name, description, userId, published, price, rating } = productData.body;
+  
+    // Create a new product object with the data, including the images field
+    const product = new Product({
+      name,
+      description,
+      userId,
+      published,
+      image : images, // Include the images field here
+      price,
+      rating
+    });
+
+    // Save the product to the database
     return await product.save();
   }
 
