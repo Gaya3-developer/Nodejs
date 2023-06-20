@@ -29,15 +29,14 @@ module.exports=(sequelize,DataTypes)=>{
             type: DataTypes.STRING,
              allowNull:false
          },
-         createdby:{
-            type:DataTypes.INTEGER,
-            allowNull:false,
-            references:{
-                model:User,
-                key:User.id
+         createdby: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                model: 'User', // Pass the model name as a string
+                key: 'id'
             }
         },
-
        
          
        
