@@ -55,13 +55,14 @@ class ProductService {
   async addProduct(productData) {
    
     // Get the uploaded files from the request
-    const files = [...productData.file];
+    const files = [...productData.files];
+ 
     // Process the files and extract the filenames
-    const images = files.map(file => file.filename);
+    const images = files.map(file => file.originalname);
   
     // Get the other product data from the request body
     const { name, description, userId, published, price, rating } = productData.body;
-  
+    console.log(images)
     // Create a new product object with the data, including the images field
     const product = new Product({
       name,
@@ -100,7 +101,7 @@ class ProductService {
   }
 
   async findProductsByUserId(userId) {
-    return await Product.find({ userId });
+    return await Product.find({ userId:userId });
   }
  async getAllSortedByPrice(){
     return await Product.find().sort({ price: 1 }); 

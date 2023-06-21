@@ -155,7 +155,7 @@ class ProductController {
         // Count the total number of products that match the filter
         const totalCount = await Product.countDocuments(filter);
   
-        res.json({ products, totalCount });
+        res.json({ products, totalCount, page });
       } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal server error' });
@@ -197,6 +197,7 @@ class ProductController {
   async getProductById(req, res) {
     try {
       const productId = req.params.id;
+      console.log(productId)
       const product = await productService.getProductById(productId);
       if (!product) {
         return res.status(404).json({ error: 'Product not found' });
@@ -296,7 +297,7 @@ class ProductController {
   }
   async  exportAllProducts(req, res) {
     try {
-      const filename = await productServiceexportProductsToExcel();
+      const filename = await productService.exportProductsToExcel();
   
       // Send the file as a response
       res.download(filename);

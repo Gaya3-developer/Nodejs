@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon server.js"
   },
-  "author": "shrilakshmi shenoy",
+  "author": "Gayathri",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.0",

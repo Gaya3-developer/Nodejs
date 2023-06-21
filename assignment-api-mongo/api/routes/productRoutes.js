@@ -61,15 +61,16 @@ const storage = multer.diskStorage({
 // Create the Multer middleware for multiple files
 const upload = multer({ storage: storage }).array('images', 5); // 'files' is the field name for multiple files, and 5 is the maximum number of files allowed
 
-
-
+router.get('/product/export', verifyToken, productController.exportAllProducts);
+router.get('/:id', verifyToken, productController.getProductById);
+router.get('/product/published', verifyToken, productController.findPublishedProducts);
 router.get('/sort/price',verifyToken, productController.getAllSortedByPrice);
 router.get('/sort/rating',verifyToken, productController.getAllSortedByRating);
-router.get('/export', verifyToken, productController.exportAllProducts);
-router.get('/published', verifyToken, productController.findPublishedProducts);
-router.get('/:userId', verifyToken, productController.findProductsByUserId);
+
+router.get('/product/:userId', verifyToken, productController.findProductsByUserId);
+
 router.get('/', verifyToken, productController.getAllProducts);
-router.get('/:id', verifyToken, productController.getProductById);
+
 router.post('/', verifyToken, upload, productController.addProduct);
 router.put('/:id', verifyToken, productController.updateProduct);
 router.delete('/:id', verifyToken, productController.deleteProduct);
